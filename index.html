@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connectus B2B Matchmaking</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* General Styles & Reset */
+        body {
+            font-family: 'Poppins', sans-serif; /* Applied new font */
+            margin: 0;
+            padding: 0;
+            background-color: #f7f3f5; /* Very light pink-grey */
+            color: #4a4a4a; /* Soft dark grey text */
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1, h2, h3 {
+            color: #5c304a; /* Deep Plum for headings */
+            font-weight: 600;
+        }
+
+        .section {
+            padding: 60px 0;
+            margin-bottom: 20px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .section:first-of-type {
+            margin-top: 40px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2em;
+            margin-bottom: 40px;
+            color: #7a546c; /* Muted plum title */
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* --- Navbar --- */
+        .navbar {
+            background-color: #ffffff;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-bottom: 1px solid #f0e6e6; 
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5em;
+            font-weight: 700; /* Bolder logo */
+            color: #5c304a;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .logo i {
+            color: #e57373; /* Rose accent for icon */
+        }
+
+        .nav-links a {
+            color: #777;
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        .nav-links a:hover {
+            color: #e57373;
+        }
+
+        /* --- Buttons & CTA --- */
+        .auth-buttons button {
+            margin-left: 10px;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 50px; /* Pill shape for softness */
+            cursor: pointer;
+            font-weight: 500;
+        }
+        
+        .btn-start-matching, .btn-find-partner {
+            background-color: #e57373; /* Soft Rose Pink */
+            color: white;
+            transition: background-color 0.3s ease, transform 0.1s;
+        }
+        .btn-find-partner {
+            background-color: #e57373; /* Soft Rose Pink */
+            color: white;
+            padding: 18px 40px; /* INCREASED PADDING: makes button taller and wider */
+            font-size: 1.2em; /* Slightly larger text */
+            font-weight: 600;
+            border-radius: 50px; /* INCREASED RADIUS: makes it pill-shaped */
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.1s;
+            text-transform: uppercase;
+        }
+        .btn-find-partner:hover {
+            background-color: #d35a5a;
+            transform: translateY(-2px); 
+            box-shadow: 0 5px 10px rgba(229, 115, 115, 0.3);
+        }
+
+        /* --- Hero Section --- */
+        .hero-section {
+            text-align: center;
+            padding: 100px 0 60px;
+            background-color: #fff;
+            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+            border-radius: 12px;
+            margin: 20px auto;
+            max-width: 1200px;
+        }
+
+        .hero-title {
+            font-size: 3.5em;
+            font-weight: 700;
+        }
+
+        /* --- Trust Bar Enhancement --- */
+        .trust-bar {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid #f0e6e6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            font-size: 0.9em;
+            color: #777;
+        }
+        /* Styling for the branded "logos" */
+        .trust-logo {
+            font-weight: 600;
+            color: #888; /* Grayscale effect */
+            opacity: 0.7;
+            text-transform: uppercase;
+            font-size: 1.1em;
+            transition: opacity 0.3s, transform 0.3s;
+        }
+        .trust-logo:hover {
+            opacity: 1;
+            transform: scale(1.05); /* Interactive hover */
+        }
+        .trust-text {
+            font-style: italic;
+            color: #aaa;
+            margin-left: 20px;
+        }
+
+        /* --- How It Works & Key Features Cards --- */
+        .how-it-works-section .steps-grid,
+        .features-grid {
+            display: flex;
+            justify-content: space-around;
+            gap: 30px;
+            text-align: center;
+        }
+
+        .step-item, .feature-item {
+            flex: 1;
+            padding: 30px 20px;
+            background-color: #fcfcfc; /* White background for definition */
+            border-radius: 10px;
+            border: 1px solid #f0e6e6; /* Soft border */
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        }
+        .step-item:hover, .feature-item:hover {
+            box-shadow: 0 8px 15px rgba(229, 115, 115, 0.1); /* Soft pink shadow on hover */
+            border-color: #fce4ec; /* Lighter pink border */
+        }
+
+        .icon-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 2px solid #e57373;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            background-color: #fce4ec;
+        }
+
+        .icon-circle i {
+            font-size: 2.5em;
+            color: #e57373;
+        }
+        
+        /* Key Features Icons */
+        .feature-item .icon-circle.small {
+            width: 60px;
+            height: 60px;
+        }
+
+        /* --- Action Section --- */
+        .action-section {
+            background-color: #fcf6f9; /* Off-white pinkish background */
+            padding: 80px 0;
+            margin-top: 20px;
+        }
+
+        .action-grid {
+            display: flex;
+            gap: 40px;
+            padding: 20px;
+            justify-content: center;
+        }
+
+        .booking-side, .calendar-side {
+            flex: 1;
+            min-width: 45%; 
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .booking-side h3, .calendar-side h3 {
+            color: #5c304a;
+            border-bottom: 2px solid #f0e6e6;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        .embed-placeholder {
+            height: 370px;
+            margin-top: 15px;
+            overflow: hidden; 
+            border-radius: 8px;
+        }
+        .embed-placeholder iframe {
+            /* Ensures the iframe is fully responsive within the container */
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            background-color: #5c304a; /* Deep Plum Footer */
+            color: white;
+            font-size: 0.85em;
+            margin-top: 40px;
+        }
+
+        /* --- Responsive adjustments (Unchanged) --- */
+        @media (max-width: 992px) {
+            .action-grid {
+                flex-direction: column;
+            }
+            .booking-side, .calendar-side {
+                min-width: 100%;
+            }
+            .how-it-works-section .steps-grid,
+            .features-grid {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-handshake"></i> CONNECTUS
+            </div>
+            <nav class="nav-links">
+                <a href="#">Why Us</a>
+                <a href="#">How It Works</a>
+                <a href="#">Case Studies</a>
+                <a href="#">Pricing</a>
+                <a href="#">Events</a>
+            </nav>
+            <div class="auth-buttons">
+                <button class="btn btn-start-matching">START MATCHING</button>
+                <button class="btn btn-login">LOG IN</button>
+                <button class="btn btn-plus">+</button>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero-section">
+        <div class="container">
+            <h1 class="hero-title">Connect with the Partners Who Drive Your Growth</h1>
+            <p class="hero-subtitle">AI-powered B2B matchmaking for enterprise, suppliers, and investors</p>
+            <button class="btn btn-find-partner">FIND YOUR NEXT BUSINESS PARTNER</button>
+            <div class="trust-bar">
+                <span class="trust-logo">SIEMENS</span>
+                <span class="trust-logo">PwC</span>
+                <span class="trust-logo">Unilever</span>
+                <span class="trust-text">Trusted by 5,000+ Enterprises across 12 Industries</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="section how-it-works-section">
+        <div class="container">
+            <h2 class="section-title">HOW IT WORKS</h2>
+            <div class="steps-grid">
+                <div class="step-item">
+                    <div class="icon-circle"><i class="fas fa-user"></i></div>
+                    <h3>1. Create Your Profile</h3>
+                    <p>Tell us about your business and your partnership goals.</p>
+                </div>
+                <div class="step-item">
+                    <div class="icon-circle"><i class="fas fa-brain"></i></div>
+                    <h3>2. Get Matched</h3>
+                    <p>Our intelligent algorithms suggest the best potential partners.</p>
+                </div>
+                <div class="step-item">
+                    <div class="icon-circle"><i class="fas fa-calendar-check"></i></div>
+                    <h3>3. Schedule Meetings</h3>
+                    <p>Effortlessly arrange 1-on-1 calls or meetings with your matches.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section key-features-section">
+        <div class="container">
+            <h2 class="section-title">KEY FEATURES</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="icon-circle small"><i class="fas fa-bullseye"></i></div>
+                    <h3>Targeted Matches</h3>
+                    <p>Leverage our AI to find partners that precisely fit your strategic criteria.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="icon-circle small"><i class="fas fa-shield-alt"></i></div>
+                    <h3>Verified Profiles</h3>
+                    <p>All partners are vetted to ensure credibility and commitment to growth.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="icon-circle small"><i class="fas fa-calendar-alt"></i></div>
+                    <h3>Integrated Scheduling</h3>
+                    <p>Book meetings directly from the platform, eliminating back-and-forth emails.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="action" class="action-section">
+        <div class="container">
+            <h2 class="section-title">Ready for Direct Connection?</h2>
+            <div class="action-grid">
+                
+                <div class="booking-side">
+                    <h3>1. Request a Quick Call (Google Form)</h3>
+                    <p>Fill out our short pre-qualification form to help us prepare for your needs.</p>
+                    
+                    <div class="embed-placeholder">
+                        <iframe 
+                            src="https://docs.google.com/forms/d/e/1FAIpQLSdfPMCQPLgDpTqKrsF3ARv23kDbgJjrJ4ZQkgjzzlsL9l8wMg/viewform?embedded=true"
+                            width="100%" 
+                            height="100%"
+                            frameborder="0" 
+                            marginheight="0" 
+                            marginwidth="0"
+                            style="border: none;"
+                            title="Quick Call Pre-Qualification Form"
+                        >
+                            Loading…
+                        </iframe>
+                    </div>
+                </div>
+
+                <div class="calendar-side">
+                    <h3>2. Schedule a 1-on-1 Strategy Session (Example: Calendly)</h3>
+                    <p>Choose a time on our calendar to discuss your goals with a specialist.</p>
+                    
+                    <div class="embed-placeholder">
+                        <iframe 
+                            src="https://calendly.com/your-business-link/30min-strategy-call?embed=true"
+                            class="calendar-iframe"
+                            title="Schedule a Strategy Session"
+                            loading="lazy"
+                            width="100%"
+                            height="100%"
+                            style="border: none;"
+                        ></iframe>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Connectus B2B Matchmaking. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // JS functionality would go here
+    </script>
+
+</body>
+</html>
